@@ -77,8 +77,9 @@ begin
 					end
 					else
 					begin
-						if (bit_index == 0)
-							parity_bit <= current_data;
+						//if (bit_index == 0)
+							//parity_bit <= current_data;
+						parity_bit <= parity_bit^current_data;
 						bit_index <= bit_index + 1;
 						current_state <= S_DATA;
 					end
@@ -96,7 +97,11 @@ begin
 				begin
 					clk_counter <= 0;
 					current_state <= S_STOP;
-					if (parity_bit == current_data)
+					/*if (parity_bit == current_data)
+						parity_flag <= 1'b1;
+					else
+						parity_flag <= 1'b0;*/
+					if(parity_bit^current_data == 1'b1)
 						parity_flag <= 1'b1;
 					else
 						parity_flag <= 1'b0;
